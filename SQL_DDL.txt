@@ -10,9 +10,9 @@ h float,
 l float,
 t int,
 n int,
-timestamp timestamp,
-ticker varchar(20),
-currency varchar(20)
+timestamp timestamp non null,
+ticker varchar(20) non null,
+currency varchar(20) non null
 )
 
 create table schema_name.currency_data as (
@@ -46,6 +46,6 @@ SGD float,
 THB float,
 TRY float,
 ZAR float,
-base_currency varchar(20),
-Date date
+base_currency varchar(20) non null,
+Date date non null
        )

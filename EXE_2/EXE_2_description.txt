@@ -1,0 +1,34 @@
+ERD description:
+
+overview:
+In general, I think it is best to minimize the information stored in this schema can be done by decreasing the
+EVENTS table volume because its volume will be the largest, in addition to allowing queries to be executed
+from this table and connecting all other information to it in one way or another.
+ This was my guiding principle in design.
+
+I chose to design the ERD in a somewhat hybrid STAR SCHEMA style.
+According to the structure and relationships of the entities mentioned in the exercise,
+I saw fit to design several dimension tables for each entity account, sub account,portfolio,campaign,ad_group and ads
+so that if we want to display information about a particular entity in queries beyond its ID,
+we will have to perform a JOIN, an operation that is not possible in most databases (especially columnar DB).
+
+The entity relationships were explained in the exercise and therefore the connections
+between them can be seen using foreign keys in the ERD schema.
+
+My solution provides a solution for both historical queries and current data analysis,
+but it is important to note that there is a limitation that the dimension and history are very large,
+so there will be an increase in latency when executing historical queries because the events table will be very large.
+I did several things in DESIGN to reduce this limitation:
+
+1. Creating a time table that will store information about the times of the events.
+This will eliminate the use of time functions, operations that burden most databases
+
+2. Creating a BIDS table that will store information about each BID and LABEL.
+ Since they can change more frequently (every hour), there is a field called is_latest that will only be TRUE for
+ records that are up-to-date, which will make it easier to query this table.
+ For example, there are advertisements with a BID that is updated, so in the BIDS table,
+ only one record in the table will have the is_latest =TRUE field,
+ which can significantly reduce the amount of information that will be retrieved in queries,
+ and can also allow you to see the development of the BID over time.
+
+3.
