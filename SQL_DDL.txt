@@ -1,3 +1,6 @@
+# TODO: indexes, partioning, keys
+# TODO: consider multi tables based on time frames  e.g. seconds, minute, hour, day, week, month, quarter, year
+
 create table schema_name.stock_price_data as (
 v int ,
 vw float,

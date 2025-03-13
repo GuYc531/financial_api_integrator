@@ -83,6 +83,7 @@ else:
 
 log.info(f"successfully created object stock_price_data ready to insert to DB")
 
+# insert to database table based on 'time_frame' value table
 
 # final_stock_price_data(['v', 'vw', 'o', 'c', 'h', 'l', 't', 'n', 'timestamp', 'ticker'], dtype='object')
 
