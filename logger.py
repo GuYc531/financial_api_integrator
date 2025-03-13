@@ -11,6 +11,7 @@ class Logger:
         :param name: Logger name (usually __name__).
         :param log_file: Optional file path to log to.
         :param level: Logging level (e.g., logging.INFO, logging.DEBUG).
+        :param cloud_log: boolean states if sending logs to cloud vendor (not implemented fully)
         """
         self.logger = logging.getLogger(name)
         self.logger.setLevel(level)
