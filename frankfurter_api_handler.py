@@ -29,14 +29,10 @@ class FrankfurterApiHandler:
                 latest (bool): If True, fetch the latest exchange rates for the base currency; if False, fetch historical rates.
 
             Attributes:
-                log (Logger): The logger used to log messages for the class.
-                frankfurter_base_url (str): The base URL for the Frankfurter API, retrieved from environment variables.
-                frankfurter_api_version (str): The version of the Frankfurter API to use, retrieved from environment variables.
                 date_to_fetch_from (str): The start date for data fetching.
                 date_to_fetch_till (str): The end date for data fetching.
                 base_currency (str): The base currency for the exchange rate data.
                 latest (bool): Flag indicating if the latest data is requested.
-                frankfurter_url (str): The complete URL for making the request to the Frankfurter API, built dynamically.
                 ticker (str): The stock ticker symbol.
                 date_column_name (str): The name of the date column in the resulting DataFrame.
 

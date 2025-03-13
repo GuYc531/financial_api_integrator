@@ -24,7 +24,7 @@ class PolygonApiHandler:
             ticker (str): The stock ticker symbol to fetch data for.
             date_to_fetch_from (str): The start date for the data to fetch (format: YYYY-MM-DD).
             date_to_fetch_till (str): The end date for the data to fetch (format: YYYY-MM-DD).
-            number_of_time_frames (int): The number of time frames to fetch.
+            number_of_time_frames (str): The number of time frames to fetch in string.
             time_frame (str): The time frame for the data (e.g., "day", "minute").
             adjusted (bool): Whether to fetch adjusted data (True or False).
             sort (str): Sorting order for the data ("asc" for ascending or "desc" for descending).
@@ -36,25 +36,21 @@ class PolygonApiHandler:
             ValueError: If the API key is not provided in the environment or as a parameter.
 
         Attributes:
-            log (Logger): The logger used to log messages for the class.
-            polygon_base_url (str): The base URL for the Polygon API, retrieved from environment variables.
-            polygon_api_version (str): The version of the Polygon API to use, retrieved from environment variables.
             date_to_fetch_from (str): The start date for data fetching.
             date_to_fetch_till (str): The end date for data fetching.
-            number_of_time_frames (int): Number of time frames to request from the API.
+            number_of_time_frames (str): Number of time frames to request from the API in string.
             time_frame (str): The requested time frame for the data.
-            adjusted (bool): Whether the data is adjusted.
+            adjusted (str): Whether the data is adjusted in string for the URL
             sort (str): Sorting order for the data.
             ticker (str): The stock ticker symbol.
             latest (bool): Flag indicating if the latest data is requested.
-            polygon_url (str): The complete URL for making the request to the Polygon API, built dynamically.
 
         Example:
             # Example of initializing the class
             polygon_data = PolygonData(ticker="AAPL",
                                        date_to_fetch_from="2024-01-01",
                                        date_to_fetch_till="2024-12-31",
-                                       number_of_time_frames=30,
+                                       number_of_time_frames='30',
                                        time_frame="day",
                                        adjusted=True,
                                        sort="asc",
