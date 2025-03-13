@@ -86,7 +86,7 @@ class FrankfurterApiHandler:
                 adjusted_data = pd.DataFrame(data).transpose()
 
             adjusted_data[self.date_column_name] = adjusted_data.index
-
+            adjusted_data['base_currency'] = self.base_currency
             self.log.info(f"successfully got data for ticker {self.ticker}:")
         else:
             self.log.error(f"Error {frankfurter_response.status_code}: {frankfurter_response.text}")

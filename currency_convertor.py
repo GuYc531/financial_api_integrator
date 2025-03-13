@@ -56,4 +56,5 @@ def convert_currency_in_stock_price_df(stock_price_data: pd.DataFrame, latest: i
             stock_price_data.drop(currency_to_convert_to, inplace=True, axis=1)
             stock_price_data.drop(date_column_name, inplace=True, axis=1)
 
+    stock_price_data['currency'] = currency_to_convert_to
     return stock_price_data

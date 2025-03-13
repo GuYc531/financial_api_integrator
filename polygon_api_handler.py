@@ -99,6 +99,7 @@ class PolygonApiHandler:
             adjusted_data = pd.DataFrame(data)
             adjusted_data['timestamp'] = adjusted_data['t'].apply(lambda epoch: datetime.fromtimestamp(epoch / 1000))
             adjusted_data[self.date_column_name] = adjusted_data['timestamp'].apply(lambda x: str(x.date()))
+            adjusted_data['ticker'] = self.ticker
             self.log.info(f"successfully got data for ticker {self.ticker}:")
         else:
             self.log.error(f"Error {polygon_response.status_code}: {polygon_response.text}")

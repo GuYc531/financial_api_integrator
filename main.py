@@ -71,21 +71,23 @@ if stock_price_data is not None and currency_data is None:
     convertion_is_valid = False
     log.debug(f"only have stock price data and not currency data so will save currency base on {base_currency}")
 
-final_stock_price_data = convert_currency_in_stock_price_df(stock_price_data=stock_price_data,
+if convertion_is_valid:
+    stock_price_data = convert_currency_in_stock_price_df(stock_price_data=stock_price_data,
                                                             latest=latest,
                                                             currency_data=currency_data,
                                                             currency_to_convert_to=currency_to_convert_to,
                                                             date_column_name=date_column_name,
-                                                            stock_price_column_to_convert=stock_price_column_to_convert) \
-    if convertion_is_valid else stock_price_data
+                                                            stock_price_column_to_convert=stock_price_column_to_convert)
+else:
+    stock_price_data['currency'] = base_currency
 
-log.info(f"successfully created object final_stock_price_data ready to insert to DB")
+log.info(f"successfully created object stock_price_data ready to insert to DB")
 
 
-# final_stock_price_data(['v', 'vw', 'o', 'c', 'h', 'l', 't', 'n', 'timestamp'], dtype='object')
+# final_stock_price_data(['v', 'vw', 'o', 'c', 'h', 'l', 't', 'n', 'timestamp', 'ticker'], dtype='object')
 
 # currency_data(['AUD', 'BGN', 'BRL', 'CAD', 'CHF', 'CNY', 'CZK', 'DKK', 'EUR', 'GBP',
 #        'HKD', 'HUF', 'IDR', 'ILS', 'INR', 'ISK', 'JPY', 'KRW', 'MXN', 'MYR',
 #        'NOK', 'NZD', 'PHP', 'PLN', 'RON', 'SEK', 'SGD', 'THB', 'TRY', 'ZAR',
-#        'Date'],
+#        'Date', 'base_currency'],
 #       dtype='object')
