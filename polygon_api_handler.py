@@ -1,3 +1,5 @@
+import sys
+
 import requests
 import os
 from datetime import datetime, timedelta
@@ -94,7 +96,13 @@ class PolygonApiHandler:
         adjusted_data = None
 
         if polygon_response.status_code == 200:
-            data = polygon_response.json()['results']
+            data = polygon_response.json()
+            if 'results' in data.keys():
+                data = data['results']
+            else:
+                self.log.error(f"one of the arguments to the API get request is invalid {self.polygon_url} \n")
+                raise ValueError(f"one of the arguments to the API get request is invalid {self.polygon_url} \n"
+                                 f"please read again the API doc in https://polygon.io/docs/stocks/get_v2_aggs_ticker__stocksticker__range__multiplier___timespan___from___to")
 
             adjusted_data = pd.DataFrame(data)
             adjusted_data['timestamp'] = adjusted_data['t'].apply(lambda epoch: datetime.fromtimestamp(epoch / 1000))
@@ -103,5 +111,6 @@ class PolygonApiHandler:
             self.log.info(f"successfully got data for ticker {self.ticker}:")
         else:
             self.log.error(f"Error {polygon_response.status_code}: {polygon_response.text}")
+            sys.exit(0)
 
         return adjusted_data

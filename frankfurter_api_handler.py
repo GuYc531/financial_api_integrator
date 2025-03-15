@@ -78,7 +78,12 @@ class FrankfurterApiHandler:
         adjusted_data = None
 
         if frankfurter_response.status_code == 200:
-            data = frankfurter_response.json()['rates']
+            data = frankfurter_response.json()
+            if 'rates' in data.keys():
+
+                data = data['rates']
+            else:
+                self.log.error(f"one of the variables in the URL is wrong {self.frankfurter_url}")
             if isinstance(list(data.values())[0], float):
                 adjusted_data = pd.DataFrame({str(datetime.now().date()): data}).transpose()
 

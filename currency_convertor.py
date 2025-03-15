@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Tuple, Any
 
 import pandas as pd
 
@@ -6,7 +6,7 @@ import pandas as pd
 def convert_currency_in_stock_price_df(stock_price_data: pd.DataFrame, latest: int, currency_data: pd.DataFrame,
                                        date_column_name: str,
                                        stock_price_column_to_convert: List[str],
-                                       currency_to_convert_to: str) -> pd.DataFrame:
+                                       currency_to_convert_to: str) -> Tuple[pd.DataFrame, Any]:
     """
         Converts stock prices in a DataFrame from one currency to another based on the provided currency data.
 
@@ -25,7 +25,7 @@ def convert_currency_in_stock_price_df(stock_price_data: pd.DataFrame, latest: i
 
         Returns:
             pd.DataFrame: The adjusted stock price DataFrame with converted prices in the specified target currency.
-
+            timestamp: of the latest observation from the stock_price_data 'timestamp' column
         Example:
             # Example of converting stock prices using the latest currency exchange data
             adjusted_stock_prices = convert_currency_in_stock_price_df(stock_price_data=stock_df,
@@ -57,4 +57,4 @@ def convert_currency_in_stock_price_df(stock_price_data: pd.DataFrame, latest: i
             stock_price_data.drop(date_column_name, inplace=True, axis=1)
 
     stock_price_data['currency'] = currency_to_convert_to
-    return stock_price_data
+    return stock_price_data, max(stock_price_data['timestamp'])
