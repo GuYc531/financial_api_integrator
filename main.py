@@ -1,8 +1,4 @@
-import os
-
 import logging
-from distutils.command.config import config
-
 from logger import Logger
 
 from frankfurter_api_handler import FrankfurterApiHandler
