@@ -95,4 +95,24 @@ testing:
 
 data schemes:
 the client SDK will collect events in JSON format, saving them in S3 in JSON (real time)/parquet (Batch).
-next, Spark will load the data, transform it ti tabular and will save it in RedShift.
+S3 will provide a solid, cheap and flexible storage for the raw data, and we
+can apply the ETL logic in streaming or batching on the same storage.
+
+next, Spark will load the data,
+transform it to tabular format (more adjustable for advanced analytics and ad hoc quires),
+will enrich the database (add more features, maybe across users, dates, Geo location ect )
+and will save it in Amazon RedShift.
+
+RedShift will be our analytical database, because it's a columnar database. could be any other columnar database e.g. Vertica
+but for simplification of implementation and monitoring I chose RedShift .
+That means it stores data by columns rather than by rows,
+which makes it highly optimized for analytics and complex queries over large datasets.
+It will be the best choice for Perfect for OLAP (Online Analytical Processing) workloads,
+like aggregations, reporting, and data analysis, which this task demands.
+
+Finally, Amazon QuickSight will allow the analysts to query the RedShift database in a secure and permitted
+only way based on pre-defined IAM groups in the AWS environment.
+In addition, Amazon QuickSight integrates seamlessly with Amazon Redshift, and can use caches mechanism which will improve performance ,
+saving costs and reduce loads on the RedShift cluster.
+
+Both RedShift and QuickSight can scale together based on demand as well as the other AWS services.
