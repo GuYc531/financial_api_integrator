@@ -6,7 +6,7 @@ EVENTS table volume because its volume will be the largest, in addition to allow
 from this table and connecting all other information to it in one way or another.
 This was my guiding principle in design.
 
-I chose to design the ERD in a somewhat hybrid STAR SCHEMA style.
+I chose to design the ERD in a somewhat hybrid star schema and snowflake style.
 According to the structure and relationships of the entities mentioned in the exercise,
 I saw fit to design several dimension tables for each entity account, sub account,portfolio,campaign,ad_group and ads
 so that if we want to display information about a particular entity in queries beyond its ID,
@@ -31,7 +31,10 @@ This will eliminate the use of time functions, operations that burden most datab
  which can significantly reduce the amount of information that will be retrieved in queries,
  and can also allow you to see the development of the BID over time.
 
-3.
+3. I choose to use pure snowflake schema on ads, ads_group, campaign, portfolio entities although
+    there are not many columns in each entity table, maybe if I will know the data changing pace I will combine
+    some of the entities to one table and 'suffer' from duplication of data but saves time while querying the table.
+
 
 indexes:
 

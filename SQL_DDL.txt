@@ -1,5 +1,3 @@
-# TODO: indexes, partioning, keys
-# TODO: consider multi tables based on time frames  e.g. seconds, minute, hour, day, week, month, quarter, year
 
 - multi table approach, handler will check for the value of `time_frame`
 and will insert the data to the relevant table( create if not exists)

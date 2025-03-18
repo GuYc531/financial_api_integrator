@@ -22,26 +22,32 @@ Diagram's components:
     and low price storage for large quantities of data, also  scalable and secure
     Acts as a data lake for Spark-based ETL jobs.
 
-6. Spark: spark cluster will run on AWS infrastructure in order to collect logs from the pods instances.
+6. amazon lambda: Amazon Lambda lets you run code without managing servers.
+    You just write your function, and only pay per execution time, making it cost-effective and scalable.
+    In this case it will connect to the Spark cluster and will trigger the jobs inside.
+    ** more advance solution for this part (depends on how complex the spark jobs and their order will be)
+     will be Airflow.
+
+7. Spark: spark cluster will run on AWS infrastructure in order to collect logs from the pods instances.
     the processing layer of this cluster, will be used to enrich, clean, and transform raw data
     into the analytics-ready datasets.
     Supports batch processing (e.g. daily aggregations) and real-time micro-batch (streaming) with Spark Structured Streaming.
     Can apply business logic, including user segmentation from the Business Analysis team.
 
-7. Amazon RedShift: stores processed data, high-performance data warehouse for structured analytical workloads.
+8. Amazon RedShift: stores processed data, high-performance data warehouse for structured analytical workloads.
     It stores aggregated and enriched event data for advanced analytics, supports complex SQL queries for ad-hoc exploration and scheduled reporting.
     scales efficiently to handle large volumes of historical data.
 
-8. Amazon QuickSight: amazon Self-service analytics tool,can be performed ad-hoc queries,
+9. Amazon QuickSight: amazon Self-service analytics tool,can be performed ad-hoc queries,
     and real time and interactive dashboard on S3 and redshift data storage.
 
-9. Amazon CloudWatch: the log center of all the cluster, consumes logs from all the components (amazon based by default,
+10. Amazon CloudWatch: the log center of all the cluster, consumes logs from all the components (amazon based by default,
     external with adaption) and present a fully live monitoring dashboards (default and custom)
     Tracks API Gateway metrics (errors, latencies), Kinesis throughput, and Spark job health.
     Can send alerts in case of data loss, processing failures, or performance degradation,
     ensures reliable data processing by triggering automated scaling or manual interventions.
 
-10. company external data: In order to fully segment the users i assume that the company
+11. company external data: In order to fully segment the users i assume that the company
     has more metadata or action data about the users, so the analytics service must be connected to this data (QuickSight).
 
 In this solution, I mainly use AWS services, and this is because they provide many services that are suitable
@@ -114,5 +120,6 @@ Finally, Amazon QuickSight will allow the analysts to query the RedShift databas
 only way based on pre-defined IAM groups in the AWS environment.
 In addition, Amazon QuickSight integrates seamlessly with Amazon Redshift, and can use caches mechanism which will improve performance ,
 saving costs and reduce loads on the RedShift cluster.
+other tools like powerBI or Qlik would be an appropriate alternative.
 
 Both RedShift and QuickSight can scale together based on demand as well as the other AWS services.
